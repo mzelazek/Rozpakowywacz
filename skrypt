@@ -1,0 +1,33 @@
+﻿#!/bin/bash
+if [ -f "$1" ] ; then
+echo "Podaj pelna sciezke do katalogu docelowego:";
+read katalog;
+     case "$1" in
+        *.tar.bz2) tar xjf $1 -C $katalog;;
+        *.tar.gz) tar xzf $1 -C $katalog;;
+        *.bz2)  mv $1 $sciezka;
+                cd $sciezka;
+                bunzip2 $1;;
+        *.rar)  mv $1 $sciezka;
+                cd $sciezka;
+                unrar x $1 ;;
+        *.gz) mv $1 $sciezka;
+                cd $sciezka;
+                gunzip $1 ;;
+        *.tar) tar xf $1 -C $katalog;;
+        *.tbz2) tar xjf $1 -C $katalog;;
+        *.tgz) tar xzf $1 -C $katalog;;
+        *.zip) mv $1 $sciezka;
+                cd $sciezka;
+                unzip $1;;
+        *.Z) mv $1 $sciezka;
+                cd $sciezka;
+                uncompress $1 ;;
+        *.7z) mv $1 $sciezka;
+                cd $sciezka;
+                7z x $1 ;;
+        *) echo "nieobslugiwany format pliku" ;;
+      esac
+else
+      echo "'$1' nie jest plikiem"
+fi
